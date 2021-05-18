@@ -113,11 +113,13 @@ const iconList = [
 
 let newIconList = [];
 
-const insertHtml = document.querySelector(".card_container");
+const selectHtml = document.querySelector(".card_container");
 	
 generate(iconList);
 
 function selected(){
+
+	deletehtml(selectHtml);
 
 	let select = document.getElementById("select_type").value;
 	console.log(select);
@@ -138,15 +140,14 @@ function selected(){
 		newIconList = iconList;
 	}
 
-	console.log(newIconList);
-
 	generate(newIconList);
+	console.log(newIconList);
 }
 
 
-function generate(array) {
+function generate(list) {
 
-	array.forEach((element, index) => {
+	list.forEach((element) => {
 
 		if(element.type === 'animal'){
 			element.color = 'blue';
@@ -156,7 +157,7 @@ function generate(array) {
 			element.color = 'purple';
 		}
 		
-		insertHtml.insertAdjacentHTML("beforeend", 
+		selectHtml.insertAdjacentHTML("beforeend", 
 			`
 			<div class="card d_flex center_middle column">
 					<i class="${element.family} ${element.prefix}${element.name}" style="color: ${element.color}"></i>
@@ -168,4 +169,8 @@ function generate(array) {
 	});
 }
 
-
+function deletehtml(list){
+	while(list.hasChildNodes()){
+		list.removeChild(list.firstChild);
+	}
+}
